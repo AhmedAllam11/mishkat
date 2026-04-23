@@ -3,7 +3,7 @@ import { AuthContext } from '../AuthProvider'
 import Sidebar from '../Sidebar'
 import NavBar from '../NavBar'
 import HeroSection from './HeroSection'
-import AllContact from '../../contact/AllContact'
+// import SignUp from '../../contact/SignUp'
 import AbutTeacher from './AbutTeacher'
 import AboutSection from './AboutSection'
 

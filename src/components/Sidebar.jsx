@@ -34,7 +34,7 @@ export const childLinks = [
   { id: 11, name: "التقارير", path: "/dashboard/teacher/reports", icon: <IoDocumentTextSharp />, role: 'teacher' },
   { id: 12, name: "المكتبة القرآنية", path: "/dashboard/teacher/library", icon: <FiBookOpen />, role: 'teacher' },
 
-  { id: 7, name: "الفرم", path: "/dashboard/parent/contact", icon: <MdOutlineAccountCircle />, role: 'teacher' },
+  { id: 12, name: "الفرم", path: "/dashboard/parent/contact", icon: <MdOutlineAccountCircle />, role: 'parent' },
   { id: 13, name: "تقارير الابناء", path: "/dashboard/parent/reports", icon: <FaClipboard />, role: 'parent' },
   { id: 14, name: "جدول الحلقات", path: "/dashboard/parent/episods", icon: <FaBook />, role: 'parent' },
   { id: 15, name: "الاشعارات", path: "/dashboard/parent/noifications", icon: <IoIosNotifications />, role: 'parent' },

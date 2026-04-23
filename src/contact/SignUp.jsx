@@ -3,7 +3,7 @@ import { AuthContext } from '../components/AuthProvider';
 import { useNavigate } from 'react-router-dom';
 import { MdSchool, MdPerson, MdPeopleAlt } from 'react-icons/md';
 
-function AllContact() {
+function SignUp() {
 
   // 🧠 تسجيل المستخدم
   const { login } = useContext(AuthContext);
@@ -236,4 +236,4 @@ const Input = ({ label, error, ...props }) => (
   </div>
 );
 
-export default AllContact;
+export default SignUp;

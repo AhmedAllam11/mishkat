@@ -4,8 +4,9 @@ import { createRoot } from 'react-dom/client';
 import { AuthProvider } from './components/AuthProvider.jsx';
 import App from './App.jsx';
 // import Login from './components/contact/Login.jsx';
-import AllContact from './contact/AllContact.jsx';
+// import AllContact from './contact/AllContact.jsx';
 import SignOut from './contact/SignOut.jsx';
+import Login from './contact/Login.jsx';
 import DashboardLayout from './components/DashboardLayout.jsx';
 import CoursesPage from './student/CoursesPage.jsx';
 import PackagesPage from './teacher/PackagesPage.jsx';
@@ -32,13 +33,15 @@ import Tracks from './components/NavbarLink/Tracks.jsx';
 import Pricing from './components/NavbarLink/Pricing.jsx';
 import StudentLogin from './contact/StudentLogin.jsx';
 import ProfileParent from './parent/Profile.jsx';
+import SignUp from './contact/SignUp.jsx';
 
 const router = createBrowserRouter([
   { path: "/", element: <App /> },
   // { path: "/login", element: <Login /> },
-  { path: "/register", element: <AllContact /> },
+  { path: "/register", element: <SignUp/> },
   { path: "/StudentLogin", element: <StudentLogin /> },
   { path: "/signout", element: <SignOut /> },
+  { path: "/login", element: <Login /> },
   { path: "/exam/:id", element: <ExamPage /> },
   { path: "/result", element: <ResultPage /> },
   { path: "/contact", element: <Pricing/> },
@@ -67,7 +70,7 @@ const router = createBrowserRouter([
       { path: "teacher/reports", element: <Reports/> },
       { path: "teacher/evaluation", element: <Evaluation/> },
 
-      { path: "parent/reports", element: <ProfileParent/> },
+      { path: "parent/contact", element: <ProfileParent/> },
       { path: "parent/reports", element: <ReportsPage /> },
       { path: "parent/episods", element: <Episods /> },
       { path: "parent/noifications", element: <Notifications /> },
