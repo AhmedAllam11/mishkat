@@ -1,186 +1,194 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 function PackagesPage() {
+  const [data, setData] = useState(null);
+  const [sessions, setSessions] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // 🔌 API
+  const loadData = () => {
+    setLoading(true);
+
+    axios.get("/db.json").then((res) => {
+      setData(res.data);
+      setSessions(res.data.sessions);
+      setLoading(false);
+    });
+  };
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  // 🎯 Start session
+  const startSession = (id) => {
+    setSessions((prev) =>
+      prev.map((s) =>
+        s.id === id ? { ...s, status: "active" } : s
+      )
+    );
+  };
+
+  // 🔄 toggle status
+  const toggleStatus = (id) => {
+    setSessions((prev) =>
+      prev.map((s) =>
+        s.id === id
+          ? {
+              ...s,
+              status: s.status === "active" ? "list" : "active"
+            }
+          : s
+      )
+    );
+  };
+
+  if (loading || !data) {
+    return (
+      <div className="h-screen flex items-center justify-center text-green-700 text-2xl">
+        جاري التحميل...
+      </div>
+    );
+  }
+
   return (
-    <>
-  {/* Main Content */}
-  <main className="flex-1 p-6 space-y-6">
-    {/* Header */}
-    <div className="flex justify-between items-center">
-      <div className="flex gap-3">
-        <button className="bg-green-700 text-white px-4 py-2 rounded-lg font-semibold">
-          {" "}
-          إضافة حلقة جديدة <i className="fa-solid fa-circle-plus" />
-        </button>
-        <button className="bg-gray-300 border px-4 py-2 rounded-lg font-semibold">
-          جدول الحلقات{" "}
-          <i
-            className="fa-regular fa-calendar-days"
-            style={{ color: "rgb(4, 160, 69)" }}
-          />
-        </button>
-      </div>
-      <div className="text-right">
-        <h1 className="text-xl font-bold">الحلقات القرآنية</h1>
-        <p className="text-sm text-gray-400 mt-1">
-          {" "}
-          المعلم يدير الحلقات المسئول عنها
-        </p>
-      </div>
-    </div>
-    {/* Top Cards */}
-    <div className="grid grid-cols-3 gap-6">
-      {/* Main Card */}
-      <div className="col-span-2 bg-green-800 text-white rounded-xl p-6 text-right">
-        <div>
-          <span className="text-sm bg-green-700 px-3 py-1 rounded-full">
-            جارية الآن{" "}
-          </span>
-          <h2 className="text-lg font-bold mt-3">
-            حلقة الإتقان - المستوى الثالث
-          </h2>
-          <p className="text-sm mt-2 opacity-80">
-            مراجعة سورة البقرة من آية 142 إلى 176-التركيز على أحكام النون
-            الساكنة والتنوين.
-          </p>
-        </div>
-        <div className="text-left">
-          <button className="mt-8 bg-white text-green-800 px-4 py-2 rounded-lg font-semibold">
-            دخول الحلقة
-            <i className="fa-solid fa-arrow-right-to-bracket" />
+    <div className="p-6 bg-gray-100 space-y-6">
+
+      {/* HEADER */}
+      <div className="flex justify-between items-center">
+        <div className="flex gap-3">
+
+          <button
+            onClick={loadData}
+            className="bg-green-700 text-white px-4 py-2 rounded-lg"
+          >
+            تحديث
+          </button>
+
+          <button className="bg-gray-300 px-4 py-2 rounded-lg">
+            جدول الحلقات
           </button>
         </div>
-        <div className="flex  -space-x-2 mt-6 ">
-          <div className="w-8 h-8 bg-white rounded-[10px] border" />
-          <div className="w-8 h-8 bg-gray-300 rounded-[10px] border" />
-          <div className="w-8 h-8 bg-gray-400 rounded-[10px] border" />
-          <div className="w-8 h-8 bg-gray-500 text-white text-xs flex items-center justify-center rounded-[10px]">
-            +12
-          </div>
-        </div>
-      </div>
-      {/* Stats */}
-      <div className="bg-white rounded-xl p-6 space-y-4">
-        <div className="flex justify-between">
-          <span className="font-bold">03</span>
-          <span className="text-gray-600">الحلقات النشطة</span>
-        </div>
-        <div className="flex justify-between">
-          <span className="font-bold">42</span>
-          <span className="text-gray-600">إجمالي الطلاب</span>
-        </div>
-        <div className="text-green-700 text-right text-sm font-semibold">
-          زيادة بنسبة 12% عن الأسبوع الماضي
-          <i
-            className="fa-solid fa-arrow-trend-up "
-            style={{ color: "rgb(4, 126, 89)" }}
-          />
-        </div>
-      </div>
-    </div>
-    {/* Stats */}
-    {/* Sessions List */}
-    <div className="bg-white rounded-xl p-6 space-y-4">
-      <h2 className="font-bold text-right">قائمة الحلقات اليومية</h2>
-      {/* Item 1 */}
-      <div className="flex justify-between items-center border p-4 rounded-lg">
-        {/* Action */}
-        <button className="bg-green-700 text-white px-4 py-1 rounded">
-          بدء
-        </button>
-        <span className="text-sm bg-green-100 text-green-700 px-3 py-1 rounded-full">
-          حاضر الآن
-        </span>
-        {/* Content */}
-        <div className="flex flex-col text-right">
-          <div className="flex items-center gap-2 justify-end mb-1"></div>
-          <h3 className="font-semibold">حلقة حفظ الصغار(أ)</h3>
-          <div className="flex items-center gap-4 text-sm text-gray-500 justify-end mt-1">
-            <div className="flex items-center gap-1">
-              <span>12 طالب</span>
-              <i className="fa-solid fa-user-group" />
-            </div>
-            <div className="flex items-center gap-1">
-              <span> 05:30 - 04:00</span>
-              <i className="fa-regular fa-clock" />
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* Item 2 */}
-      <div className="flex justify-between items-center border p-4 rounded-lg">
-        <button className="bg-white border text-green-700 px-3 py-1 rounded">
-          التفاصيل
-        </button>
-        <span className="text-sm bg-gray-200  px-3 py-1 rounded-full">
-          قائمة{" "}
-        </span>
-        <div className="flex flex-col text-right">
-          <h3 className="font-semibold">حلقة التجويد العملي</h3>
-          <div className="flex items-center gap-4 text-sm text-gray-500 justify-end mt-1">
-            <div className="flex items-center gap-1">
-              <span>8 طالب</span>
-              <i className="fa-solid fa-user-group" />
-            </div>
-            <div className="flex items-center gap-1">
-              <span> 07:30 - 06:00 </span>
-              <i className="fa-regular fa-clock" />
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* Item 3 */}
-      <div className="flex justify-between items-center border p-4 rounded-lg">
-        <button className="bg-white border text-green-700 px-3 py-1 rounded">
-          التفاصيل
-        </button>
-        <span className="text-sm bg-gray-200  px-3 py-1 rounded-full">
-          قائمة{" "}
-        </span>
-        <div className="flex flex-col text-right">
-          <h3 className="font-semibold">حلقة المتون العلمية</h3>
-          <div className="flex items-center gap-4 text-sm text-gray-500 justify-end mt-1">
-            <div className="flex items-center gap-1">
-              <span>15 طلاب</span>
-              <i className="fa-solid fa-user-group" />
-            </div>
-            <div className="flex items-center gap-1">
-              <span>10:00 - 08:30</span>
-              <i className="fa-regular fa-clock" />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    {/* Weekly Schedule */}
-    <div className="bg-white rounded-xl p-6">
-      <div className="flex justify-between items-center mb-4">
-        <span className="font-bold text-green-700">عرض الجدول الكامل</span>
-        <span className="font-bold">مواعيد الحلقات الأسبوعية</span>
-      </div>
-      <div className="flex justify-between text-sm text-gray-600 text-center">
-        <span className="flex-1">الجمعة</span>
-        <span className="flex-1">الخميس</span>
-        <span className="flex-1">الأربعاء</span>
-        <span className="flex-1">الثلاثاء</span>
-        <span className="flex-1">الاثنين</span>
-        <span className="flex-1">الأحد</span>
-        <span className="flex-1">السبت</span>
-      </div>
-      <div className="grid grid-cols-7 gap-2 mt-3 text-center">
-        <div className="h-2 bg-green-700 rounded" />
-        <div className="h-2 bg-green-300 rounded" />
-        <div className="h-2 bg-green-700 rounded" />
-        <div className="h-2 bg-green-200 rounded" />
-        <div className="h-2 bg-green-700 rounded" />
-        <div className="h-2 bg-green-400 rounded" />
-        <div className="h-2 bg-green-700 rounded" />
-      </div>
-    </div>
-  </main>
-</>
 
-  )
+        <div className="text-right">
+          <h1 className="text-xl font-bold">
+            الحلقات القرآنية
+          </h1>
+          <p className="text-sm text-gray-500">
+            لوحة تحكم المعلم
+          </p>
+        </div>
+      </div>
+
+      {/* TOP CARD */}
+      <div className="grid grid-cols-3 gap-6">
+
+        <div className="col-span-2 bg-green-800 text-white p-6 rounded-xl">
+          <span className="bg-green-600 px-3 py-1 rounded-full text-sm">
+            {data.main.status}
+          </span>
+
+          <h2 className="text-xl font-bold mt-3">
+            {data.main.title}
+          </h2>
+
+          <p className="text-sm mt-2 opacity-80">
+            {data.main.desc}
+          </p>
+
+          <button className="mt-4 bg-white text-green-800 px-4 py-2 rounded-lg">
+            دخول الحلقة
+          </button>
+        </div>
+
+        {/* STATS */}
+        <div className="bg-white p-6 rounded-xl space-y-3">
+          <p>الحلقات: {data.stats.active}</p>
+          <p>الطلاب: {data.stats.students}</p>
+          <p className="text-green-700 font-bold">
+            نمو {data.stats.growth}%
+          </p>
+        </div>
+      </div>
+
+      {/* SESSIONS */}
+      <div className="bg-white p-6 rounded-xl space-y-4">
+
+        <h2 className="font-bold text-right">
+          قائمة الحلقات اليومية
+        </h2>
+
+        {sessions.map((s) => (
+          <div
+            key={s.id}
+            className="flex justify-between items-center border p-4 rounded-lg"
+          >
+
+            {/* ACTIONS */}
+            <div className="flex gap-2">
+
+              <button
+                onClick={() => startSession(s.id)}
+                className="bg-green-700 text-white px-3 py-1 rounded"
+              >
+                بدء
+              </button>
+
+              <button
+                onClick={() => toggleStatus(s.id)}
+                className="border px-3 py-1 rounded"
+              >
+                تغيير
+              </button>
+
+            </div>
+
+            {/* STATUS */}
+            <span
+              className={`px-3 py-1 rounded-full text-sm ${
+                s.status === "active"
+                  ? "bg-green-200 text-green-800"
+                  : "bg-gray-200"
+              }`}
+            >
+              {s.status === "active"
+                ? "حاضر الآن"
+                : "قائمة"}
+            </span>
+
+            {/* INFO */}
+            <div className="text-right">
+              <h3 className="font-bold">{s.title}</h3>
+              <p className="text-sm text-gray-500">
+                {s.students} طالب • {s.time}
+              </p>
+            </div>
+
+          </div>
+        ))}
+      </div>
+
+      {/* WEEKLY */}
+      <div className="bg-white p-6 rounded-xl">
+        <h2 className="font-bold text-right mb-4">
+          مواعيد الأسبوع
+        </h2>
+
+        <div className="grid grid-cols-7 gap-2">
+          {data.weekly.map((w, i) => (
+            <div
+              key={i}
+              className={`h-2 rounded ${
+                w > 0.5 ? "bg-green-700" : "bg-green-300"
+              }`}
+            />
+          ))}
+        </div>
+      </div>
+
+    </div>
+  );
 }
 
-export default PackagesPage
+export default PackagesPage;

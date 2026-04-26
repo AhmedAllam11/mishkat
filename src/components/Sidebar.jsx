@@ -16,6 +16,7 @@ import { FaChartSimple } from 'react-icons/fa6';
 import { MdOutlineAccountCircle, MdOutlinePayments, MdOutlineTaskAlt } from 'react-icons/md';
 import { CgProfile } from 'react-icons/cg';
 import { IoIosNotifications, IoMdTrendingUp } from 'react-icons/io';
+import { FaUsers, FaClipboardCheck, FaChalkboardTeacher, FaCog } from 'react-icons/fa';
 
 //  روابط  
  
@@ -39,6 +40,16 @@ export const childLinks = [
   { id: 14, name: "جدول الحلقات", path: "/dashboard/parent/episods", icon: <FaBook />, role: 'parent' },
   { id: 15, name: "الاشعارات", path: "/dashboard/parent/noifications", icon: <IoIosNotifications />, role: 'parent' },
   { id: 16, name: "الاشتراك والدفع", path: "/dashboard/parent/payment", icon: <MdOutlinePayments />, role: 'parent' },
+
+  { id: 17, name: "إدارة الحسابات", path: "/dashboard/admin/accounts", icon: <FaUsers />, role: 'admin' },
+  { id: 18, name: "إدارة الطلاب", path: "/dashboard/admin/students", icon: <FaUserGraduate />, role: 'admin' },
+  { id: 19, name: "المحتوى التعليمي", path: "/dashboard/admin/content", icon: <FaBook />, role: 'admin' },
+  { id: 20, name: "تنظيم الحلقات", path: "/dashboard/admin/circles", icon: <FaCalendarAlt />, role: 'admin' },
+  { id: 21, name: "مراجعة المعلمين", path: "/dashboard/admin/review-teachers", icon: <FaClipboardCheck />, role: 'admin' },
+  { id: 22, name: "التقارير", path: "/dashboard/admin/reports", icon: <IoDocumentTextSharp />, role: 'admin' },
+  { id: 23, name: "الاشتراكات والدفع", path: "/dashboard/admin/subscriptions", icon: <MdOutlinePayments />, role: 'admin' },
+  { id: 24, name: "الإشعارات", path: "/dashboard/admin/notifications", icon: <IoIosNotifications />, role: 'admin' },
+  { id: 25, name: "الإعدادات", path: "/dashboard/admin/settings", icon: <FaCog />, role: 'admin' },
 ];
 
 function Sidebar() {

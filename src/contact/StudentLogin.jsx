@@ -43,7 +43,7 @@ function StudentLogin() {
 
     login(userData);
 
-    navigate("/"); // 👨‍🎓 داشبورد الطالب
+    navigate("/dashboard"); // 👨‍🎓 داشبورد الطالب
   };
 
   return (

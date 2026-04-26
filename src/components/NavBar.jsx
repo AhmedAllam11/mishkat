@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { AuthContext } from './AuthProvider';
 import { NavLink } from '../assets';
 import { Link, useNavigate } from 'react-router-dom';
+import Logo from './Logo';
 
 function NavBar() {
   const { isLoggedIn, userName } = useContext(AuthContext);
@@ -10,8 +11,8 @@ function NavBar() {
 
   return (
     <nav className='bg-gray-100 border-b p-4'>
-      <div className='flex justify-between items-center'>
-        <h2 className='font-bold text-xl'>Logo</h2>
+      <div className='flex justify-between items-center max-w-7xl mx-auto'>
+        <Logo />
 
         {!isLoggedIn && (
           <button className='md:hidden p-2 border rounded' onClick={() => setMenuOpen(!menuOpen)}>☰</button>

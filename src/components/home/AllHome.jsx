@@ -3,19 +3,19 @@ import { AuthContext } from '../AuthProvider'
 import Sidebar from '../Sidebar'
 import NavBar from '../NavBar'
 import HeroSection from './HeroSection'
-// import SignUp from '../../contact/SignUp'
-import AbutTeacher from './AbutTeacher'
-import AboutSection from './AboutSection'
+import ProgramsSection from './ProgramsSection'
+import TeachersSection from './TeachersSection'
+import StudySystemSection from './StudySystemSection'
+import PricingSection from './PricingSection'
+import Footer from './Footer'
 
 function AllHome() {
-  const { isLoggedIn, login } = useContext(AuthContext)
+  const { isLoggedIn } = useContext(AuthContext)
 
   return (
-    // 1. h-screen تضمن إن الصفحة واخدة طول الشاشة
-    // 2. overflow-hidden تمنع السكرول في الصفحة كاملة عشان السكرول يكون للمحتوى بس
-    <div className='flex h-screen overflow-hidden'>
+    <div className='flex h-screen overflow-hidden' dir="rtl">
 
-      {/* الجزء الخاص بالسيد بار */}
+      {/* الجزء الخاص بالسيد بار إذا كان مسجل دخول */}
       {isLoggedIn && (
         <div className='h-full shadow-lg'> 
           <Sidebar />
@@ -23,14 +23,17 @@ function AllHome() {
       )}
 
       {/* الجزء الخاص بالمحتوى اليمين (NavBar + Sections) */}
-      <div className='flex-1 flex flex-col overflow-y-auto'>
+      <div className='flex-1 flex flex-col overflow-y-auto bg-gray-50'>
         <NavBar />
 
         {/* السكرول هيكون هنا بس والمحتوى هيتحرك بحرية */}
-        <main className='p-4'>
+        <main className='w-full'>
           <HeroSection />
-          <AboutSection />
-          <AbutTeacher />
+          <ProgramsSection />
+          <TeachersSection />
+          <StudySystemSection />
+          <PricingSection />
+          <Footer />
         </main>
       </div>
 

@@ -1,64 +1,32 @@
-import React from 'react'
+import React from 'react';
+import { FaPlay } from 'react-icons/fa';
 
 function HeroSection() {
   return (
-    <>
-      <section className='app-container pt-24 pb-12  '>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+    <section className="text-center py-20 px-4 bg-white">
+      <div className="max-w-4xl mx-auto">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-emerald-800 mb-6 leading-tight">
+          حفظ، تجويد وتفسير
+          <br />
+          <span className="text-emerald-600">بأسلوب يناسب الجميع</span>
+        </h1>
+        <p className="text-gray-500 text-lg md:text-xl mb-10 max-w-2xl mx-auto">
+          منصة مشكاة توفر لك بيئة تفاعلية مع معلمين متخصصين لتعلم القرآن الكريم والتفسير والفقه.
+        </p>
+        <button className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 px-10 rounded-full text-lg shadow-lg hover:shadow-xl transition-all mb-16">
+          ابدأ رحلة التعلم الآن
+        </button>
 
-          {/* right content */}
-          <div className="space-y-6 text-center lg:text-right">
-            <h1 className="text-3xl md:text-5xl font-bold leading-tight text-gray-800">
-              تعلم دينك بسهولة مع 
-              <span className="text-green-500"> أكاديمية مشكاة</span>
-            </h1>
-
-            <p className="text-gray-600 text-lg leading-relaxed">
-              منصة تعليمية متكاملة لتعلم القرآن الكريم، التفسير،  
-              بأسلوب مبسط يناسب جميع المستويات، بإشراف نخبة من المعلمين المتخصصين.
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <button className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-500 transition">
-                ابدأ التعلم الآن
-              </button>
-
-              <button className="border border-gray-300 px-6 py-3 rounded-lg hover:bg-gray-100 transition">
-                تصفح المسارات
-              </button>
-            </div>
-
-            {/* stats */}
-            <div className="flex justify-center lg:justify-start gap-5 pt-6 text-center">
-              <div>
-                <h3 className="text-2xl font-bold text-green-500">+5000</h3>
-                <p className="text-gray-500 text-sm">طالب</p>
-              </div>
-
-              <div>
-                <h3 className="text-2xl font-bold text-green-500">+50</h3>
-                <p className="text-gray-500 text-sm">دورة</p>
-              </div>
-
-              <div>
-                <h3 className="text-2xl font-bold  text-green-500">+20</h3>
-                <p className="text-gray-500 text-sm">مدرس</p>
-              </div>
-            </div>
-          </div>
-
-          {/* left content */}
-          <div className="flex justify-center">
-            <img 
-              src="https://cdn-icons-png.flaticon.com/512/3135/3135755.png" 
-              alt="تعلم القرآن"
-              className="w-72 md:w-96"
-            />
+        {/* مساحة الفيديو (Video Placeholder) */}
+        <div className="relative w-full max-w-4xl mx-auto h-[400px] md:h-[500px] bg-gray-200 rounded-3xl shadow-2xl flex items-center justify-center group cursor-pointer overflow-hidden">
+          <div className="absolute inset-0 bg-emerald-900/10 group-hover:bg-emerald-900/20 transition-all"></div>
+          <div className="w-20 h-20 bg-emerald-600 text-white rounded-full flex items-center justify-center text-3xl shadow-lg z-10 group-hover:scale-110 transition-transform">
+            <FaPlay className="ml-2" />
           </div>
         </div>
-      </section>
-    </>
-  )
+      </div>
+    </section>
+  );
 }
 
-export default HeroSection
+export default HeroSection;

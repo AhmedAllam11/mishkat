@@ -35,6 +35,18 @@ import StudentLogin from './contact/StudentLogin.jsx';
 import ProfileParent from './parent/Profile.jsx';
 import SignUp from './contact/SignUp.jsx';
 
+// Admin Imports
+import AccountsManagement from './admin/AccountsManagement.jsx';
+import StudentsManagement from './admin/StudentsManagement.jsx';
+import ContentManagement from './admin/ContentManagement.jsx';
+import CirclesManagement from './admin/CirclesManagement.jsx';
+import ReviewTeachers from './admin/ReviewTeachers.jsx';
+import ReportsAdmin from './admin/ReportsAdmin.jsx';
+import SubscriptionsAdmin from './admin/SubscriptionsAdmin.jsx';
+import NotificationsAdmin from './admin/NotificationsAdmin.jsx';
+import SettingsAdmin from './admin/SettingsAdmin.jsx';
+import AdminLogin from './contact/AdminLogin.jsx';
+
 const router = createBrowserRouter([
   { path: "/", element: <App /> },
   // { path: "/login", element: <Login /> },
@@ -42,6 +54,7 @@ const router = createBrowserRouter([
   { path: "/StudentLogin", element: <StudentLogin /> },
   { path: "/signout", element: <SignOut /> },
   { path: "/login", element: <Login /> },
+  { path: "/admin/login", element: <AdminLogin /> },
   { path: "/exam/:id", element: <ExamPage /> },
   { path: "/result", element: <ResultPage /> },
   { path: "/contact", element: <Pricing/> },
@@ -51,7 +64,7 @@ const router = createBrowserRouter([
     { path: "/student/courses", element: <CoursesPage /> },
   {
     path: "/dashboard",
-    element: <PrivateRoute element={<DashboardLayout />} allowedTypes={['student','teacher','parent']} />,
+    element: <PrivateRoute element={<DashboardLayout />} allowedTypes={['student','teacher','parent','admin']} />,
     children: [
       // { path: "student/exam", element: <ExamPage /> },
       { path: "student/profile", element: <Profile/> },
@@ -75,6 +88,17 @@ const router = createBrowserRouter([
       { path: "parent/episods", element: <Episods /> },
       { path: "parent/noifications", element: <Notifications /> },
       { path: "parent/payment", element: <Payment /> },
+
+      // Admin Routes
+      { path: "admin/accounts", element: <AccountsManagement /> },
+      { path: "admin/students", element: <StudentsManagement /> },
+      { path: "admin/content", element: <ContentManagement /> },
+      { path: "admin/circles", element: <CirclesManagement /> },
+      { path: "admin/review-teachers", element: <ReviewTeachers /> },
+      { path: "admin/reports", element: <ReportsAdmin /> },
+      { path: "admin/subscriptions", element: <SubscriptionsAdmin /> },
+      { path: "admin/notifications", element: <NotificationsAdmin /> },
+      { path: "admin/settings", element: <SettingsAdmin /> },
     ]
   }
 ]);

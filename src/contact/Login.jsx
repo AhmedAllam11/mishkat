@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../components/AuthProvider";
 import { MdEmail, MdLock } from "react-icons/md";
+import Logo from "../components/Logo";
 
 function Login() {
   const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
 
   // 📦 بيانات الفورم (الإيميل + الباسورد)
   const [formData, setFormData] = useState({
@@ -52,16 +55,25 @@ function Login() {
     // ❗ لو فيه أخطاء وقف
     if (!validate()) return;
 
+    // تحديد نوع الحساب مبدئياً بناءً على الإيميل (لغرض التجربة لحين وجود باك إند)
+    let accountType = "student"; // الافتراضي
+    if (formData.email.includes("teacher")) accountType = "teacher";
+    if (formData.email.includes("parent")) accountType = "parent";
+
     // 📤 البيانات الجاهزة للإرسال للباك
     const userData = {
+      name: "مستخدم تجريبي",
       email: formData.email,
-      password: formData.password,
+      accountType: accountType,
     };
 
     console.log("📤 Data sent to backend:", userData);
+    
+    // تسجيل الدخول في الـ Context
+    login(userData);
 
-    // 🔀 مؤقتًا نروح للصفحة الرئيسية (لحد ما الباك يشتغل)
-    navigate("/");
+    // 🔀 نروح للداشبورد مباشرة
+    navigate("/dashboard");
   };
 
   return (
@@ -71,10 +83,8 @@ function Login() {
       <div className="bg-white shadow-lg rounded-3xl p-6 w-full max-w-md">
 
         {/* 🔰 العنوان */}
-        <div className="text-center mb-6">
-          <h1 className="text-3xl font-bold text-emerald-900">
-            سكّاه
-          </h1>
+        <div className="text-center mb-6 flex flex-col items-center">
+          <Logo className="mb-2" />
           <p className="text-gray-500 mt-2">
             مرحبًا بعودتك
           </p>
